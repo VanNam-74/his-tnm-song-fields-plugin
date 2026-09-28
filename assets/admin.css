@@ -1,0 +1,182 @@
+/* TNM Song Fields — same palette as the Song Orders CRM */
+.tsf {
+    --tsf-rose: #9d4568;
+    --tsf-rose-dark: #83374f;
+    --tsf-rose-light: #ffedf1;
+    --tsf-ink: #1d2327;
+    --tsf-muted: #646970;
+    --tsf-line: #e7dde1;
+    --tsf-paper: #fff;
+    max-width: 1180px;
+    color: var(--tsf-ink);
+}
+
+.tsf-title { margin-bottom: 4px; }
+.tsf-lede { margin: 0 0 20px; max-width: 62ch; color: var(--tsf-muted); font-size: 14px; }
+
+.tsf-layout {
+    display: grid;
+    grid-template-columns: 230px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+/* Field rail */
+.tsf-rail { position: sticky; top: 46px; display: grid; gap: 2px; }
+.tsf-rail__item {
+    display: grid;
+    gap: 2px;
+    padding: 10px 14px;
+    border-left: 3px solid transparent;
+    border-radius: 0 8px 8px 0;
+    color: var(--tsf-ink);
+    text-decoration: none;
+}
+.tsf-rail__item:hover { background: #fbf6f8; color: var(--tsf-ink); }
+.tsf-rail__item.is-current { border-left-color: var(--tsf-rose); background: var(--tsf-rose-light); }
+.tsf-rail__item:focus { box-shadow: none; outline: 2px solid var(--tsf-rose); outline-offset: -2px; }
+.tsf-rail__name { font-weight: 600; font-size: 14px; }
+.tsf-rail__count { color: var(--tsf-muted); font-size: 12px; }
+.tsf-import { margin-top: 18px; padding: 12px 14px; border: 1px dashed var(--tsf-line); border-radius: 8px; }
+.tsf-import p { margin: 0 0 8px; color: var(--tsf-muted); font-size: 12px; }
+
+/* Editor */
+.tsf-editor {
+    padding: 22px 24px;
+    border: 1px solid var(--tsf-line);
+    border-radius: 12px;
+    background: var(--tsf-paper);
+}
+.tsf-editor__head h2 { margin: 0 0 4px; font-size: 20px; }
+.tsf-editor__head p { margin: 0 0 16px; color: var(--tsf-muted); max-width: 70ch; }
+
+.tsf-table { width: 100%; border-collapse: collapse; }
+.tsf-table th {
+    padding: 0 8px 8px;
+    color: var(--tsf-muted);
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+}
+.tsf-table td { padding: 5px 8px; border-top: 1px solid #f3ecef; vertical-align: middle; }
+.tsf-col-move { width: 28px; padding-left: 0 !important; }
+.tsf-col-value { width: 170px; }
+.tsf-col-shown { width: 64px; text-align: center !important; }
+.tsf-col-remove { width: 32px; text-align: right; }
+
+.tsf-input {
+    width: 100%;
+    min-height: 34px;
+    border: 1px solid #dcdcde !important;
+    border-radius: 6px !important;
+}
+.tsf-input:focus { border-color: var(--tsf-rose) !important; box-shadow: 0 0 0 1px var(--tsf-rose) !important; }
+textarea.tsf-input { resize: vertical; }
+.tsf-code { padding: 3px 6px; border-radius: 4px; background: #f6f2f4; color: var(--tsf-muted); font-size: 12px; cursor: help; }
+
+/* Hidden choices stay visible to admins, just muted */
+.tsf-row.is-hidden .tsf-input { color: var(--tsf-muted); background: #faf8f9; }
+.tsf-row.is-dragging { opacity: .45; }
+
+.tsf-move, .tsf-remove {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #a7aaad;
+    cursor: pointer;
+}
+.tsf-move { cursor: grab; letter-spacing: -3px; }
+.tsf-move:hover, .tsf-move:focus-visible { color: var(--tsf-rose); background: var(--tsf-rose-light); outline: none; }
+.tsf-remove { font-size: 18px; }
+.tsf-remove:hover, .tsf-remove:focus-visible { color: #b32d2e; background: #fcf0f1; outline: none; }
+
+/* Shown switch */
+.tsf-switch { position: relative; display: inline-flex; cursor: pointer; }
+.tsf-switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.tsf-switch__track {
+    width: 34px;
+    height: 20px;
+    border-radius: 999px;
+    background: #d6d8da;
+    position: relative;
+    transition: background .15s ease;
+}
+.tsf-switch__track::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform .15s ease;
+}
+.tsf-switch input:checked + .tsf-switch__track { background: var(--tsf-rose); }
+.tsf-switch input:checked + .tsf-switch__track::after { transform: translateX(14px); }
+.tsf-switch input:focus-visible + .tsf-switch__track { outline: 2px solid var(--tsf-rose); outline-offset: 2px; }
+
+.tsf-add {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px dashed #d9c3cc;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--tsf-rose);
+    font-weight: 600;
+    cursor: pointer;
+}
+.tsf-add:hover, .tsf-add:focus-visible { background: var(--tsf-rose-light); outline: none; }
+
+/* Live preview: the one place that looks like the customer form */
+.tsf-preview {
+    margin-top: 22px;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fbf3f5, #f6edf0);
+}
+.tsf-preview h3 { margin: 0 0 12px; font-size: 13px; color: var(--tsf-rose-dark); }
+.tsf-preview__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.tsf-chip {
+    display: inline-flex;
+    flex-direction: column;
+    padding: 8px 14px;
+    border: 1px solid #e8ccd6;
+    border-radius: 999px;
+    background: #fff;
+    font-size: 13px;
+    font-weight: 600;
+}
+.tsf-chip small { color: var(--tsf-muted); font-size: 11px; font-weight: 400; }
+.tsf-preview__empty { margin: 0; color: #b32d2e; }
+
+.tsf-editor__foot { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
+.tsf-btn {
+    min-height: 36px;
+    padding: 0 16px;
+    border: 1px solid var(--tsf-line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--tsf-ink);
+    font-weight: 600;
+    cursor: pointer;
+}
+.tsf-btn:focus-visible { outline: 2px solid var(--tsf-rose); outline-offset: 2px; }
+.tsf-btn--primary { border-color: var(--tsf-rose); background: var(--tsf-rose); color: #fff; }
+.tsf-btn--primary:hover { background: var(--tsf-rose-dark); }
+.tsf-btn--quiet { color: var(--tsf-muted); }
+.tsf-btn--quiet:hover { color: var(--tsf-ink); border-color: #cfc3c8; }
+.tsf-dirty { margin-left: auto; color: var(--tsf-rose); font-size: 12px; font-weight: 600; }
+
+@media (max-width: 900px) {
+    .tsf-layout { grid-template-columns: 1fr; }
+    .tsf-rail { position: static; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .tsf-col-value { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .tsf-switch__track, .tsf-switch__track::after { transition: none; }
+}
